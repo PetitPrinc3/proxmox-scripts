@@ -141,8 +141,13 @@ step_start "Openresty"
       repository=http://openresty.org/package/$EPS_OS_ARCH/$EPS_OS_DISTRO
     fi
 
-    source="deb [arch=$EPS_OS_ARCH signed-by=/usr/share/keyrings/openresty.gpg] $repository $EPS_OS_CODENAME "
-    if [ "$EPS_OS_DISTRO" = "debian" ]; then
+	if [ "$EPS_OS_CODENAME" = "trixie" ]; then
+		source="deb [arch=$EPS_OS_ARCH signed-by=/usr/share/keyrings/openresty.gpg] $repository bookworm "	
+ 	else
+	    source="deb [arch=$EPS_OS_ARCH signed-by=/usr/share/keyrings/openresty.gpg] $repository $EPS_OS_CODENAME "
+    fi
+	
+	if [ "$EPS_OS_DISTRO" = "debian" ]; then
       source+="openresty"
     else
       source+="main"
